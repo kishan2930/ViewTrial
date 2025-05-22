@@ -1,0 +1,18 @@
+export enum Strings {
+  Discover = 'Discover',
+  discover = 'discover',
+  Shortlist = 'Shortlist',
+  shortlist = 'shortlist',
+  MyAccount = 'My Account',
+  myAccount = 'myAccount',
+  More = 'More',
+  more = 'more',
+  signInBtn = 'Join / Sign In',
+  List = 'List',
+  list = 'list',
+  Inspections = 'Inspections',
+  inspections = 'inspections',
+  Auction = 'Auction',
+  auction = 'auction',
+  searchPlaceHolder = 'Search suburb, school or street',
+}
