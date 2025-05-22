@@ -17,8 +17,6 @@ const BottomTabsScreens: React.FC = () => {
   // console.log('check this');
   console.log('check this');
   // console.log('check this');
-  console.log('check this');
-  // console.log('check this');
 
   return (
     <BottomTabs.Navigator
