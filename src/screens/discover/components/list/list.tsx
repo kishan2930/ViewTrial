@@ -1,20 +1,16 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import ListItem from './components/listItem/listItem';
+import {Text} from 'react-native';
 
 const List = () => {
   return (
-    <View style={styles.container}>
-      <Text>List Screen</Text>
-    </View>
+    <>
+      <Text>List component</Text>
+      <ListItem />
+    </>
   );
 };
 
 export default List;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+// const styles = StyleSheet.create({});

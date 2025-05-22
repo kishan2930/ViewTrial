@@ -15,4 +15,8 @@ export enum IconName {
   back = 'back',
   filter = 'filter',
   contactUs = 'contactUs',
+  share = 'share',
+  bed = 'bed',
+  bath = 'bath',
+  car = 'car',
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
 import DiscoverHeader from './components/discoverHeader/discoverHeader';
-import TopTabScreens from './components/topTabs/topTabs';
+import TopTabScreens from '@navigations/topTabs';
 
 interface DiscoverProps {
   navigation: NavigationProp<ParamListBase>;
