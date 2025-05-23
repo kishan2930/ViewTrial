@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {GlobalStyles} from '@constants/styles';
 import Icon from '@components/icon/icon';
@@ -6,7 +6,7 @@ import {IconName} from '@constants/iconName';
 
 const ListItem: React.FC = () => {
   return (
-    <>
+    <Pressable>
       <View style={styles.cardHeader}>
         <Text>Image</Text>
         <Text style={styles.ownerName}>Name</Text>
@@ -17,7 +17,9 @@ const ListItem: React.FC = () => {
       <View style={styles.cardImages}></View>
       <View style={styles.cardDetails}>
         <Text style={styles.price}>700000</Text>
-        <Text style={styles.address}>address</Text>
+        <Text style={styles.address}>
+          801/1 Dyer Street, Richmand, VIC 3121
+        </Text>
         <View style={styles.accomodation}>
           <View style={styles.accomo}>
             <Icon name={IconName.bed} size={32} svgWidth={28} svgHeight={28} />
@@ -59,7 +61,7 @@ const ListItem: React.FC = () => {
           </View>
         </View>
       </View>
-    </>
+    </Pressable>
   );
 };
 
@@ -99,23 +101,30 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 20,
     fontWeight: '700',
-    backgroundColor: GlobalStyles.colors.yellow,
+    // backgroundColor: GlobalStyles.colors.yellow,
   },
   address: {
+    paddingBlock: 4,
     fontSize: 18,
     fontWeight: '300',
+    // backgroundColor: GlobalStyles.colors.green,
   },
   accomodation: {
+    paddingBlock: 4,
     flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
+    // backgroundColor: GlobalStyles.colors.orange,
   },
   accomo: {
     flexDirection: 'row',
+    // backgroundColor: GlobalStyles.colors.pink,
   },
   category: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    // backgroundColor: GlobalStyles.colors.lightBlue,
   },
   categoryType: {
     // padding: 6,

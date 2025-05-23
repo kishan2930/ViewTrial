@@ -9,5 +9,7 @@ export const GlobalStyles = {
     yellow: '#F0DA93FF',
     lightBlue: '#B3B6E7FF',
     pink: '#E9B2F0FF',
+    green: '#A1EE91FF',
+    orange: '#EBB475FF',
   },
 };
