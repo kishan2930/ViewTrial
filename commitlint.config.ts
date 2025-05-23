@@ -6,6 +6,12 @@ const Configuration: UserConfig = {
     'type-enum': [2, 'always', ['Feat', 'Fix', 'Chore']],
     'type-case': [2, 'always', 'pascal-case'],
   },
+  parserPreset: {
+    parserOpts: {
+      headerPattern: /^(\w+): (.+)$/,
+      headerCorrespondence: ['type', 'subject'],
+    },
+  },
 };
 
 export default Configuration;
