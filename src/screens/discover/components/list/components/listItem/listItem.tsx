@@ -3,6 +3,7 @@ import React from 'react';
 import {GlobalStyles} from '@constants/styles';
 import Icon from '@components/icon/icon';
 import {IconName} from '@constants/iconName';
+import Accommodation from '../accommodation/accommodation';
 
 const ListItem: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const ListItem: React.FC = () => {
         <Text>Image</Text>
         <Text style={styles.ownerName}>Name</Text>
         <View style={styles.ownerImage}>
-          <Image height={20} width={20} />
+          <Image />
         </View>
       </View>
       <View style={styles.cardImages}></View>
@@ -20,29 +21,7 @@ const ListItem: React.FC = () => {
         <Text style={styles.address}>
           801/1 Dyer Street, Richmand, VIC 3121
         </Text>
-        <View style={styles.accomodation}>
-          <View style={styles.accomo}>
-            <Icon name={IconName.bed} size={32} svgWidth={28} svgHeight={28} />
-            <Text>3</Text>
-          </View>
-          <View style={styles.accomo}>
-            <Icon name={IconName.bath} size={32} svgWidth={28} svgHeight={28} />
-            <Text>3</Text>
-          </View>
-          <View style={styles.accomo}>
-            <Icon name={IconName.car} size={32} svgWidth={28} svgHeight={28} />
-            <Text>3</Text>
-          </View>
-          <View style={styles.accomo}>
-            <Icon
-              name={IconName.meterSqrt}
-              size={32}
-              svgWidth={28}
-              svgHeight={28}
-            />
-            <Text>500 m2</Text>
-          </View>
-        </View>
+        <Accommodation bed={3} bath={3} car={3} area="500 m2" />
         <View style={styles.category}>
           <Text style={styles.categoryType}>House</Text>
           <View style={styles.cardIcons}>
@@ -81,6 +60,8 @@ const styles = StyleSheet.create({
     marginRight: 70,
   },
   ownerImage: {
+    borderColor: GlobalStyles.colors.white,
+    borderWidth: 2,
     borderRadius: '50%',
     height: 70,
     width: 70,
@@ -105,21 +86,11 @@ const styles = StyleSheet.create({
   },
   address: {
     paddingBlock: 4,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '300',
     // backgroundColor: GlobalStyles.colors.green,
   },
-  accomodation: {
-    paddingBlock: 4,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    // backgroundColor: GlobalStyles.colors.orange,
-  },
-  accomo: {
-    flexDirection: 'row',
-    // backgroundColor: GlobalStyles.colors.pink,
-  },
+
   category: {
     flexDirection: 'row',
     justifyContent: 'space-between',

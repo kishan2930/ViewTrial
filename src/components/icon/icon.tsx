@@ -27,7 +27,6 @@ const Icon: React.FC<IconProps> = props => {
   const rawXml = Icons[name];
 
   if (!rawXml) {
-    console.log(`Icon "${name}" not found.`);
     return null;
   }
 
@@ -40,7 +39,7 @@ const Icon: React.FC<IconProps> = props => {
   }" fill="none" xmlns="http://www.w3.org/2000/svg">${updatedXml}</svg>`;
 
   return (
-    <SvgXml xml={svgCode} width={svgWidth ?? 24} height={svgHeight ?? 24} />
+    <SvgXml xml={svgCode} width={svgWidth ?? 28} height={svgHeight ?? 28} />
   );
 };
 
