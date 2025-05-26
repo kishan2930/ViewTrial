@@ -1,7 +1,6 @@
 import React from 'react';
 import {Text} from 'react-native';
 import ListItem from './components/listItem/listItem';
-import SkeletonLoading from './components/skeletonLoading/skeletonLoading';
 // import httpService from '@utils/httpService';
 // interface LocationResultItem {
 //   id: string;
@@ -55,11 +54,6 @@ const List: React.FC = () => {
   return (
     <>
       <Text>List component</Text>
-
-      {[...Array(3)].map((_, i) => (
-        <SkeletonLoading key={i} />
-      ))}
-
       <ListItem />
     </>
   );
