@@ -1,11 +1,11 @@
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import PropertyListings from '../screens/discover/components/list/PropertyListings';
-import Inspections from '../screens/discover/components/inspections/inspections';
-import Auction from '../screens/discover/components/auction/auction';
+import PropertyListings from '@screens/discover/components/list/PropertyListings';
+import Inspections from '@screens/discover/components/inspections/inspections';
+import Auction from '@screens/discover/components/auction/auction';
 import {GlobalStyles} from '@constants/styles';
 import {Strings} from '@constants/strings';
-import {scaleFont} from '@utils/scale';
+import {scaleFont, verticalScale} from '@utils/scale';
 
 const TopTabs = createMaterialTopTabNavigator();
 
@@ -21,10 +21,10 @@ const TopTabScreens: React.FC = () => {
         },
         tabBarStyle: {
           backgroundColor: GlobalStyles.colors.searchBarBg,
-          paddingBlock: 8,
+          paddingBlock: verticalScale(8),
         },
         tabBarIndicatorStyle: {
-          height: 4,
+          height: verticalScale(4),
         },
       }}>
       <TopTabs.Screen

@@ -28,8 +28,8 @@ const DiscoverHeader = () => {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        {renderBtn('Filters', IconName.filter)}
-        {renderBtn('Save search', IconName.shortList)}
+        {renderBtn(Strings.filters, IconName.filter)}
+        {renderBtn(Strings.saveSearch, IconName.shortList)}
       </View>
     </View>
   );

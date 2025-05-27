@@ -18,25 +18,25 @@ const PropertyFeatures: React.FC<PropertyFeaturesProps> = props => {
     <View style={styles.container}>
       {bed && (
         <View style={styles.featureItem}>
-          <Icon name={IconName.bed} size={scale(38)} />
+          <Icon name={IconName.bed} size={scale(32)} />
           <Text style={styles.featureText}>{bed}</Text>
         </View>
       )}
       {bath && (
         <View style={styles.featureItem}>
-          <Icon name={IconName.bath} size={scale(38)} />
+          <Icon name={IconName.bath} size={scale(32)} />
           <Text style={styles.featureText}>{bath}</Text>
         </View>
       )}
       {car && (
         <View style={styles.featureItem}>
-          <Icon name={IconName.car} size={scale(38)} />
+          <Icon name={IconName.car} size={scale(32)} />
           <Text style={styles.featureText}>{car}</Text>
         </View>
       )}
       {area && (
         <View style={styles.featureItem}>
-          <Icon name={IconName.meterSqrt} size={scale(38)} />
+          <Icon name={IconName.meterSqrt} size={scale(32)} />
           <Text style={styles.featureText}>{area} m²</Text>
         </View>
       )}

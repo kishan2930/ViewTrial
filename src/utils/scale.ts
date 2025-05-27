@@ -62,5 +62,6 @@ left / right            | scale()                    | Positioning on horizontal
 letterSpacing           | moderateScale()            | Keeps letter spacing readable
 elevation (Android)     | No scale                   | Leave as is (no scaling)
 zIndex                  | No scale                   | Logical layering, no scaling needed
+gap                     | scale                      |                                               
 
 */

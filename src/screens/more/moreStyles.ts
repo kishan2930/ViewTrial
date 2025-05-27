@@ -1,11 +1,12 @@
 import {GlobalStyles} from '@constants/styles';
+import {scaleFont, verticalScale} from '@utils/scale';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: GlobalStyles.colors.white,
-    padding: 16,
+    padding: verticalScale(16),
   },
   header: {
     flexDirection: 'row',
@@ -13,15 +14,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   lists: {
-    marginTop: 24,
+    marginTop: verticalScale(24),
   },
   version: {
-    marginTop: 24,
+    marginTop: verticalScale(24),
     alignItems: 'center',
     justifyContent: 'center',
   },
   versionText: {
-    fontSize: 18,
+    fontSize: scaleFont(18),
     fontWeight: '400',
   },
 });

@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import React from 'react';
 import Button from '@src/components/button/button';
 import Icon from '@src/components/icon/icon';
@@ -20,7 +20,7 @@ const LISTS = [
 
 const More: React.FC = () => {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <View>
           <Icon
@@ -45,7 +45,7 @@ const More: React.FC = () => {
       <View style={styles.version}>
         <Text style={styles.versionText}>6.8.3 (460)</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

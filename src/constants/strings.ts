@@ -15,4 +15,6 @@ export enum Strings {
   Auction = 'Auction',
   auction = 'auction',
   searchPlaceHolder = 'Search suburb, school or street',
+  filters = 'Filters',
+  saveSearch = 'Save search',
 }
