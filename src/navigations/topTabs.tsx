@@ -1,6 +1,6 @@
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import List from '../screens/discover/components/list/list';
+import PropertyListings from '../screens/discover/components/list/PropertyListings';
 import Inspections from '../screens/discover/components/inspections/inspections';
 import Auction from '../screens/discover/components/auction/auction';
 import {GlobalStyles} from '@constants/styles';
@@ -29,7 +29,7 @@ const TopTabScreens: React.FC = () => {
       }}>
       <TopTabs.Screen
         name={Strings.list}
-        component={List}
+        component={PropertyListings}
         options={{
           title: Strings.List,
         }}

@@ -11,6 +11,7 @@ export const GlobalStyles = {
     pink: '#E9B2F0FF',
     green: '#A1EE91FF',
     orange: '#EBB475FF',
+    error: '#ff0000',
   },
   fonts: {
     dmSansBlack: 'DMSans-Black',

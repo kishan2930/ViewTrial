@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Set your base URL (adjust based on your config system)
-const API_BASE_URL = 'https://view.com.au'; // Replace with actual
+const API_BASE_URL = 'https://resi.uatz.view.com.au'; // Replace with actual
 
 const defaultHeaders = {
   'User-Agent': 'avesta-ua',
