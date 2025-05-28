@@ -19,4 +19,6 @@ export enum IconName {
   bed = 'bed',
   bath = 'bath',
   car = 'car',
+  plus = 'plus',
+  cross = 'cross',
 }

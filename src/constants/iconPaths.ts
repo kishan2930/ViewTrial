@@ -57,6 +57,9 @@ const Icons = {
 <path d="M19.759 10.4483H4.24146L5.13707 5.0746C5.33659 3.87744 6.37237 3 7.58604 3H16.4144C17.6281 3 18.6638 3.87744 18.8634 5.0746L19.759 10.4483Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M5.48291 19.1382V21.0003" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M18.5171 19.1382V21.0003" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
+  plus: '<path d="M15.9998 6.66667V25.3333M6.6665 16H25.3332" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
+  cross:
+    '<path d="M24 8L8 24M8 8L24 24" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
 };
 
 export default Icons;

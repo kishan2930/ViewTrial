@@ -1,12 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {
-  FlatList,
-  ActivityIndicator,
-  View,
-  StyleSheet,
-  Text,
-} from 'react-native';
+import {FlatList, View, StyleSheet, Text} from 'react-native';
 import PropertyCard from './components/propertyCard/propertyCard';
+import SkeletonLoading from './components/skeletonLoading/skeletonLoading';
 import httpService from '@utils/httpService';
 import {GlobalStyles} from '@constants/styles';
 
@@ -91,11 +86,7 @@ const PropertyListings: React.FC = () => {
   }, []);
 
   if (isLoading) {
-    return (
-      <View style={styles.centered}>
-        <ActivityIndicator size="large" color={GlobalStyles.colors.primary} />
-      </View>
-    );
+    return <SkeletonLoading />;
   }
 
   if (error) {

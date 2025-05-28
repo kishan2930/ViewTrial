@@ -1,79 +1,56 @@
-// SkeletonLoading.tsx
-import React from 'react';
-import {ViewStyle} from 'react-native';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import React, {useEffect, useRef} from 'react';
+import {View, Animated, ScrollView} from 'react-native';
+import {styles} from './skeletonLoadingStyles';
 
 const SkeletonLoading: React.FC = () => {
+  const fadeAnim = useRef(new Animated.Value(0.3)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(fadeAnim, {
+          toValue: 0.6,
+          duration: 800,
+          useNativeDriver: true,
+        }),
+        Animated.timing(fadeAnim, {
+          toValue: 0.3,
+          duration: 800,
+          useNativeDriver: true,
+        }),
+      ]),
+    ).start();
+  }, [fadeAnim]);
+
+  const renderSkeletonItem = () => {
+    return (
+      <Animated.View style={[styles.skeletonContainer, {opacity: fadeAnim}]}>
+        <View style={styles.imageContainer} />
+        <View style={styles.contentContainer}>
+          <View style={styles.line} />
+          <View style={[styles.line, {width: '75%'}]} />
+          <View style={[styles.line, {width: '65%'}]} />
+          <View style={styles.lastRowContainer}>
+            <View style={styles.shortLine} />
+            <View style={styles.boxesContainer}>
+              <View style={styles.box} />
+              <View style={styles.box} />
+            </View>
+          </View>
+        </View>
+      </Animated.View>
+    );
+  };
+
   return (
-    <SkeletonPlaceholder>
-      <SkeletonPlaceholder.Item style={styles.card}>
-        {/* Image */}
-        <SkeletonPlaceholder.Item style={styles.image} />
-
-        {/* Text lines below image */}
-        <SkeletonPlaceholder.Item style={styles.textWrapper}>
-          <SkeletonPlaceholder.Item style={styles.priceLine} />
-          <SkeletonPlaceholder.Item style={styles.addressLine} />
-          <SkeletonPlaceholder.Item style={styles.iconLine} />
-          <SkeletonPlaceholder.Item style={styles.categoryLine} />
-        </SkeletonPlaceholder.Item>
-
-        {/* Action icons */}
-        <SkeletonPlaceholder.Item style={styles.iconWrapper}>
-          <SkeletonPlaceholder.Item style={styles.icon} />
-          <SkeletonPlaceholder.Item style={styles.icon} />
-        </SkeletonPlaceholder.Item>
-      </SkeletonPlaceholder.Item>
-    </SkeletonPlaceholder>
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.scrollContent}>
+      {renderSkeletonItem()}
+      {renderSkeletonItem()}
+    </ScrollView>
   );
-};
-
-const styles: {[key: string]: ViewStyle} = {
-  card: {
-    marginBottom: 24,
-  },
-  image: {
-    height: 180,
-    borderRadius: 8,
-    width: '100%',
-  },
-  textWrapper: {
-    marginTop: 12,
-  },
-  priceLine: {
-    width: '40%',
-    height: 14,
-    borderRadius: 4,
-  },
-  addressLine: {
-    marginTop: 6,
-    width: '80%',
-    height: 14,
-    borderRadius: 4,
-  },
-  iconLine: {
-    marginTop: 6,
-    width: '70%',
-    height: 14,
-    borderRadius: 4,
-  },
-  categoryLine: {
-    marginTop: 6,
-    width: '30%',
-    height: 14,
-    borderRadius: 4,
-  },
-  iconWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginTop: 12,
-    gap: 8,
-  },
-  icon: {
-    width: 32,
-    height: 32,
-    borderRadius: 6,
-  },
 };
 
 export default SkeletonLoading;
