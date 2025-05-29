@@ -9,6 +9,8 @@ import {
   FlatList,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
 import Icon from '@components/icon/icon';
 import {styles} from './discoverHeaderStyles';
 import {IconName} from '@constants/iconName';
@@ -64,8 +66,6 @@ interface SearchResultType {
   suburb?: string[];
   street?: string[];
 }
-
-import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 type RootStackParamList = {
   list: {searchText: string};
@@ -202,6 +202,7 @@ const DiscoverHeader: React.FC = () => {
   };
 
   const onSearchPress = () => {
+    setIsVisible(!isVisible);
     navigation.navigate(Strings.list, {
       searchText: selectedItem,
     });
@@ -242,10 +243,14 @@ const DiscoverHeader: React.FC = () => {
 
   const renderBtn = (title: string, iconName: IconName) => {
     return (
-      <View style={styles.buttonWrapper}>
+      <Pressable
+        style={styles.buttonWrapper}
+        android_ripple={{
+          color: GlobalStyles.colors.buttonBgRipple,
+        }}>
         <Text style={styles.buttonText}>{title}</Text>
         <Icon name={iconName} size={32} />
-      </View>
+      </Pressable>
     );
   };
 

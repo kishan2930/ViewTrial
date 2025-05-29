@@ -6,6 +6,7 @@ export const GlobalStyles = {
     black: '#000000',
     white: '#ffffff',
     buttonBg: '#b3ddff',
+    buttonBgRipple: '#85C5FAFF',
     yellow: '#F0DA93FF',
     lightBlue: '#B3B6E7FF',
     pink: '#E9B2F0FF',

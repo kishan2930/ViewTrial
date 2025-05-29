@@ -31,7 +31,7 @@ interface ApiResponse {
 
 const PropertyListings: React.FC = () => {
   const [properties, setProperties] = useState<PropertyListing[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const fetchPropertyListings = async () => {
