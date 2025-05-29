@@ -8,16 +8,13 @@ import More from '@screens/more/more';
 import Icon from '@components/icon/icon';
 import {IconName} from '@constants/iconName';
 import {Strings} from '@constants/strings';
-import {bottomTabStyles} from './bottomTabStyles';
+import {bottomTabOptions} from './bottomTabStyles';
 
 const BottomTabs = createBottomTabNavigator();
 
 const BottomTabsScreens: React.FC = () => {
   return (
-    <BottomTabs.Navigator
-      screenOptions={{
-        ...bottomTabStyles.navigator,
-      }}>
+    <BottomTabs.Navigator screenOptions={bottomTabOptions}>
       <BottomTabs.Screen
         name={Strings.discover}
         component={Discover}
