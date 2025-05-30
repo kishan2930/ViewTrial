@@ -6,7 +6,7 @@ import {
   TextInput,
   View,
   ScrollView,
-  FlatList,
+  SectionList,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -63,33 +63,36 @@ interface ApiResponse {
 }
 
 interface SearchResultType {
-  suburb?: string[];
-  street?: string[];
+  title: string;
+  data: DataItem[];
 }
 
+// Define the RootStackParamList type for navigation
 type RootStackParamList = {
-  list: {searchText: string};
+  [Strings.list]: {
+    searchText: DataItem;
+  };
 };
 
 const DiscoverHeader: React.FC = () => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState({} as DataItem);
+  const [searchResult, setSearchResult] = useState<SearchResultType[]>([]);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<string>('');
-  const [searchResult, setSearchResult] = useState<SearchResultType>({});
-  // const [isLoading, setIsLoading] = useState<boolean>(true);
-  // const [error, setError] = useState<string | null>(null);
 
   const onChangeText = async (text: string) => {
-    // setIsLoading(true);
     if (text === '') {
-      setSearchResult({});
+      setSearchResult([]);
+    }
+    if (text.length < 3) {
+      return;
     }
     try {
       const {success, data} = await httpService.post<ApiResponse>(
         '/api/pubui/mobile/location/unified-search',
         {
-          searchText: text.toLocaleLowerCase(),
+          searchText: text.toLowerCase(),
           scope: {
             excludeLocations: false,
             excludeStreets: false,
@@ -110,36 +113,71 @@ const DiscoverHeader: React.FC = () => {
         },
       );
 
-      const result: SearchResultType = {};
-
       if (success && Array.isArray(data) && data.length > 0) {
-        data.forEach(item => {
-          if (item.locationType === 'suburb' && item.displayText) {
-            if (!result.suburb) result.suburb = [];
-            result.suburb.push(item.displayText);
-          }
-
-          if (item.streetSlug && item.streetAddress) {
-            if (!result.street) result.street = [];
-            result.street.push(item.streetAddress);
-          }
-        });
-
-        setSearchResult(result);
+        setSearchResult(filterDataByType(data));
       } else {
-        setSearchResult({});
-        // setError('No results found');
+        setSearchResult([]);
       }
     } catch (err) {
-      // setError('An error occurred while fetching data');
+      // Handle error silently
     } finally {
-      // setIsLoading(false);
+      // Add any cleanup logic if needed
     }
   };
 
+  const filterDataByType = (data: DataItem[]): SearchResultType[] => {
+    const res: SearchResultType[] = [];
+
+    const cityGroup = {title: 'City', data: [] as DataItem[]};
+    const stateGroup = {title: 'State', data: [] as DataItem[]};
+    const suburbGroup = {title: 'Suburb', data: [] as DataItem[]};
+    const projectGroup = {title: 'Projects', data: [] as DataItem[]};
+    const streetGroup = {title: 'Street', data: [] as DataItem[]};
+
+    data.forEach(item => {
+      if (item.locationType === 'state') {
+        stateGroup.data.push(item);
+      } else if (item.locationType === 'city') {
+        cityGroup.data.push(item);
+      } else if (item.locationType === 'suburb') {
+        suburbGroup.data.push(item);
+      }
+
+      if ('projectSlug' in item) {
+        projectGroup.data.push(item);
+      }
+
+      if ('streetSlug' in item) {
+        streetGroup.data.push(item);
+      }
+    });
+
+    if (stateGroup.data.length > 0) res.push(stateGroup);
+    if (cityGroup.data.length > 0) res.push(cityGroup);
+    if (suburbGroup.data.length > 0) res.push(suburbGroup);
+    if (projectGroup.data.length > 0) res.push(projectGroup);
+    if (streetGroup.data.length > 0) res.push(streetGroup);
+
+    return res;
+  };
+
+  const filterItemByType = (item: DataItem) => {
+    if ('streetSlug' in item && item.streetAddress) {
+      return item.streetAddress;
+    }
+
+    return item.displayText;
+  };
+
   const onPressCrossIcon = () => {
-    setSelectedItem('');
-    setSearchResult({});
+    setSelectedItem({} as DataItem);
+    setSearchResult([]);
+  };
+
+  const onBackModal = () => {
+    setIsVisible(!isVisible);
+    setSearchResult([]);
+    // setSelectedItem({} as DataItem);
   };
 
   const showModal = () => {
@@ -147,21 +185,21 @@ const DiscoverHeader: React.FC = () => {
       <Modal
         animationType="slide"
         visible={isVisible}
-        onRequestClose={() => {
-          setIsVisible(!isVisible);
-        }}>
+        onRequestClose={() => onBackModal()}>
         <View style={styles.modalContainer}>
           <View style={styles.searchContainer}>
             <View style={styles.searchBar2}>
               <Pressable
-                onPress={() => setIsVisible(!isVisible)}
+                onPress={() => onBackModal()}
                 style={styles.backButton}>
                 <Icon name={IconName.back} size={32} />
               </Pressable>
-              {selectedItem ? (
+              {Object.keys(selectedItem).length > 0 ? (
                 <View style={styles.selectedItemContainer}>
-                  <Text style={styles.selectedItemText}>{selectedItem}</Text>
-                  <Pressable onPress={() => onPressCrossIcon()}>
+                  <Text style={styles.selectedItemText} numberOfLines={2}>
+                    {filterItemByType(selectedItem)}
+                  </Text>
+                  <Pressable onPress={() => onPressCrossIcon()} hitSlop={8}>
                     <Icon
                       name={IconName.cross}
                       size={35}
@@ -191,13 +229,42 @@ const DiscoverHeader: React.FC = () => {
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={styles.searchResultContainer}>
-            {searchResult.suburb &&
-              showsSearchResults('Suburb', searchResult.suburb)}
-            {searchResult.street &&
-              showsSearchResults('Street', searchResult.street)}
+            {searchResult.length > 0 ? showsSearchResults() : null}
           </ScrollView>
         </View>
       </Modal>
+    );
+  };
+
+  const onSelectItem = (item: DataItem) => {
+    setSelectedItem(item);
+    setSearchResult([]);
+  };
+
+  const showsSearchResults = () => {
+    return (
+      <SectionList
+        sections={searchResult}
+        keyExtractor={(item, index) => item._id + index.toString()}
+        renderItem={({item, section}) => {
+          const displayText = filterItemByType(item);
+
+          return (
+            <Pressable
+              style={styles.listItemContainer}
+              android_ripple={{color: GlobalStyles.colors.searchBarBg}}
+              onPress={() => onSelectItem(item)}>
+              <Text style={styles.listItem}>{displayText}</Text>
+              {section.title === 'Suburb' && (
+                <Icon name={IconName.plus} size={35} />
+              )}
+            </Pressable>
+          );
+        }}
+        renderSectionHeader={({section: {title}}) => (
+          <Text style={styles.listTitle}>{title}</Text>
+        )}
+      />
     );
   };
 
@@ -210,35 +277,6 @@ const DiscoverHeader: React.FC = () => {
 
   const onSearchBarPress = () => {
     setIsVisible(!isVisible);
-    setSearchResult({});
-  };
-
-  const onSelectItem = (item: string) => {
-    setSelectedItem(item);
-    setSearchResult({});
-  };
-
-  const showsSearchResults = (title: string, data: string[]) => {
-    return (
-      <View>
-        <Text style={styles.listTitle}>{title}</Text>
-        <FlatList
-          data={data}
-          renderItem={({item}) => {
-            return (
-              <Pressable
-                style={styles.listItemContainer}
-                android_ripple={{color: GlobalStyles.colors.searchBarBg}}
-                onPress={() => onSelectItem(item)}>
-                <Text style={styles.listItem}>{item}</Text>
-                {title === 'Suburb' && <Icon name={IconName.plus} size={40} />}
-              </Pressable>
-            );
-          }}
-          keyExtractor={item => item}
-        />
-      </View>
-    );
   };
 
   const renderBtn = (title: string, iconName: IconName) => {
@@ -263,11 +301,26 @@ const DiscoverHeader: React.FC = () => {
             style={styles.searchBar}
             onPress={() => onSearchBarPress()}>
             <Icon name={IconName.discover} size={32} />
-            <TextInput
-              placeholder={Strings.searchPlaceHolder}
-              style={styles.inputField}
-              editable={false}
-            />
+            {Object.keys(selectedItem).length > 0 ? (
+              <View style={styles.selectedItemContainer}>
+                <Text style={styles.selectedItemText} numberOfLines={2}>
+                  {filterItemByType(selectedItem)}
+                </Text>
+                <Pressable onPress={() => onPressCrossIcon()} hitSlop={8}>
+                  <Icon
+                    name={IconName.cross}
+                    size={35}
+                    color={GlobalStyles.colors.white}
+                  />
+                </Pressable>
+              </View>
+            ) : (
+              <TextInput
+                placeholder={Strings.searchPlaceHolder}
+                style={styles.inputField}
+                editable={false}
+              />
+            )}
           </Pressable>
         </View>
         <View style={styles.buttonContainer}>

@@ -5,6 +5,8 @@ import {IconName} from '@constants/iconName';
 import PropertyFeatures from '../propertyFeatures/propertyFeatures';
 import {scale} from '@utils/scale';
 import {styles} from './propertyCardStyles';
+import CarouselImages from './carouselImages/carouselImages';
+import {GlobalStyles} from '@constants/styles';
 
 interface PropertyCardProps {
   property: {
@@ -24,6 +26,11 @@ interface PropertyCardProps {
     carparks?: number;
     landSize?: number;
     primaryPropertyType?: string;
+    images?: Array<{
+      sequence: number;
+      caption?: string | null;
+      url: string;
+    }>;
   };
 }
 
@@ -32,7 +39,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({property}) => {
     priceText,
     agency,
     agents = [],
-    // images,
+    images = [],
     bathrooms,
     bedrooms,
     carparks,
@@ -43,12 +50,15 @@ const PropertyCard: React.FC<PropertyCardProps> = ({property}) => {
   const hasAgents = agents && agents.length > 0;
   const agent = hasAgents ? agents[0] : null;
 
+  const BASEIMGURL =
+    'https://resi.uatz.view.com.au/viewstatic/images/listing/376-min/';
+
   const agencyLogoUrl = agency?.logoFileName
-    ? `https://resi.uatz.view.com.au/viewstatic/images/listing/376-min/${agency.logoFileName}`
+    ? `${BASEIMGURL}${agency.logoFileName}`
     : undefined;
 
   const agentPhotoUrl = agent?.agentPhotoFileName
-    ? `https://resi.uatz.view.com.au/viewstatic/images/listing/376-min/${agent.agentPhotoFileName}`
+    ? `${BASEIMGURL}${agent.agentPhotoFileName}`
     : undefined;
 
   return (
@@ -56,7 +66,11 @@ const PropertyCard: React.FC<PropertyCardProps> = ({property}) => {
       <View
         style={[
           styles.header,
-          {backgroundColor: `#${agency?.brandColour || '000'}`},
+          {
+            backgroundColor: `#${
+              agency?.brandColour || GlobalStyles.colors.transparentBlack
+            }`,
+          },
         ]}>
         <View style={styles.logoContainer}>
           {agencyLogoUrl && (
@@ -84,7 +98,9 @@ const PropertyCard: React.FC<PropertyCardProps> = ({property}) => {
       </View>
 
       <View style={styles.imageGallery}>
-        {/* Image carousel would go here */}
+        {images.length > 0 && (
+          <CarouselImages images={images} baseImageUrl={BASEIMGURL} />
+        )}
       </View>
 
       <View style={styles.detailsContainer}>
