@@ -177,7 +177,7 @@ const DiscoverHeader: React.FC = () => {
   const onBackModal = () => {
     setIsVisible(!isVisible);
     setSearchResult([]);
-    // setSelectedItem({} as DataItem);
+    setSelectedItem({} as DataItem);
   };
 
   const showModal = () => {
@@ -192,7 +192,7 @@ const DiscoverHeader: React.FC = () => {
               <Pressable
                 onPress={() => onBackModal()}
                 style={styles.backButton}>
-                <Icon name={IconName.back} size={32} />
+                <Icon name={IconName.leftArrow} size={32} />
               </Pressable>
               {Object.keys(selectedItem).length > 0 ? (
                 <View style={styles.selectedItemContainer}>
@@ -296,7 +296,7 @@ const DiscoverHeader: React.FC = () => {
     <>
       <View style={styles.headerContainer}>
         <View style={styles.searchBarContainer}>
-          <Icon name={IconName.back} size={32} />
+          <Icon name={IconName.leftArrow} size={32} />
           <Pressable
             style={styles.searchBar}
             onPress={() => onSearchBarPress()}>

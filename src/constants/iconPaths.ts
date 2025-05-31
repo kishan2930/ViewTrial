@@ -35,7 +35,8 @@ const Icons = {
 <path d="M20 10L18 10" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M20 21L18 21" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M3 12C3 11.4696 3.21071 10.9609 3.58579 10.5858C3.96086 10.2107 4.46957 10 5.00001 10H12C12.5305 10 13.0392 10.2107 13.4143 10.5858C13.7893 10.9609 14.0001 11.4696 14.0001 12V19C14.0001 19.5305 13.7893 20.0392 13.4143 20.4143C13.0392 20.7893 12.5305 21.0001 12 21.0001H5.00001C4.46957 21.0001 3.96086 20.7893 3.58579 20.4143C3.21071 20.0392 3 19.5305 3 19V12Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
-  back: '<path d="M20 24L12 16L20 8" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
+  leftArrow:
+    '<path d="M20 24L12 16L20 8" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
   filter:
     '<path d="M6.66667 28L6.66667 20M6.66667 20C8.13943 20 9.33333 18.8061 9.33333 17.3333C9.33333 15.8606 8.13943 14.6667 6.66667 14.6667C5.19391 14.6667 4 15.8606 4 17.3333C4 18.8061 5.19391 20 6.66667 20ZM6.66667 9.33333V4M16 28V20M16 9.33333V4M16 9.33333C14.5272 9.33333 13.3333 10.5272 13.3333 12C13.3333 13.4728 14.5272 14.6667 16 14.6667C17.4728 14.6667 18.6667 13.4728 18.6667 12C18.6667 10.5272 17.4728 9.33333 16 9.33333ZM25.3333 28V22.6667M25.3333 22.6667C26.8061 22.6667 28 21.4728 28 20C28 18.5272 26.8061 17.3333 25.3333 17.3333C23.8606 17.3333 22.6667 18.5272 22.6667 20C22.6667 21.4728 23.8606 22.6667 25.3333 22.6667ZM25.3333 12V4" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
   contactUs:
@@ -60,6 +61,8 @@ const Icons = {
   plus: '<path d="M15.9998 6.66667V25.3333M6.6665 16H25.3332" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
   cross:
     '<path d="M24 8L8 24M8 8L24 24" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
+  rightArrow:
+    '<path d="M12 24L20 16L12 8" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
 };
 
 export default Icons;

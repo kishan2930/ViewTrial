@@ -94,7 +94,7 @@ const CarouselImages: React.FC<CarouselImagesProps> = ({
           onPress={goToPrevImage}
           activeOpacity={0.7}>
           <Icon
-            name={IconName.back}
+            name={IconName.leftArrow}
             size={scale(24)}
             svgHeight={scale(24)}
             svgWidth={scale(24)}
@@ -109,7 +109,7 @@ const CarouselImages: React.FC<CarouselImagesProps> = ({
           onPress={goToNextImage}
           activeOpacity={0.7}>
           <Icon
-            name={IconName.discover}
+            name={IconName.rightArrow}
             size={scale(24)}
             svgHeight={scale(24)}
             svgWidth={scale(24)}
